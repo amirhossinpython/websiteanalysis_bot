@@ -1,3 +1,30 @@
+import subprocess
+import sys
+
+# لیست کتابخانه‌های مورد نیاز
+required_libraries = [
+    "rubpy",
+    "beautifulsoup4",
+    "requests",
+    "socket",
+    "urllib3"
+]
+
+
+def install_libraries():
+    for library in required_libraries:
+        try:
+            # بررسی وجود کتابخانه
+            __import__(library)
+            print(f"{library} is already installed.")
+        except ImportError:
+            
+            print(f"Installing {library}...")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", library])
+            print(f"{library} installed successfully.")
+
+# نصب کتابخانه‌ها قبل از اجرای کد اصلی
+install_libraries()
 from rubpy import Client, filters, utils
 from rubpy.types import Updates 
 from bs4 import BeautifulSoup
